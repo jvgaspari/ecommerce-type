@@ -2,6 +2,7 @@ import CartItem from '../CartItem';
 import { Wrapper } from './styles';
 import { ICartItem } from '../../interfaces';
 import { useState } from 'react';
+import { Box, Button, TextField } from '@mui/material';
 
 type Props = {
   cartItems: ICartItem[];
@@ -34,7 +35,6 @@ const [address,setAddress] = useState('' as string);
     return stored;
   }
 
-
   return (
     <Wrapper>
       <h2>Your Shopping Cart</h2>
@@ -48,17 +48,37 @@ const [address,setAddress] = useState('' as string);
         />
       ))}
       <h2>Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
-      <div style={{display: 'flex', flexDirection:'column'}}>
+      <Box display='flex' flexDirection='column' justifyContent='space-between' height='50vh'>
         <h2>Register</h2>
-        <label htmlFor="">Name:</label>
-        <input type="text" value={name} onChange={(event)=>setName(event.target.value)}/>
-        <label htmlFor="">CPF:</label>
-        <input type="text" value={cpf} onChange={(event)=>setCpf(event.target.value)}/>
-        <label htmlFor="">Address:</label>
-        <input type="text" value={address} onChange={(event)=>setAddress(event.target.value)}/>
-        <button type='button' onClick={() => saveData(data)}>Buy</button>
-        <button type='button' onClick={() => getData('usuário')}>GetData</button>
-      </div>
+        <TextField
+          id="input-name"
+          label="Name"
+          variant="outlined"
+          value={name}
+          onChange={(event)=>setName(event.target.value)}
+        />
+        <TextField
+          id="input-cpf"
+          label="CPF"
+          variant="outlined"
+          value={cpf}
+          onChange={(event)=>setCpf(event.target.value)}
+        />
+        <TextField
+          id="input-address"
+          label="Address"
+          variant="outlined"
+          value={address}
+          onChange={(event)=>setAddress(event.target.value)}
+        />
+        <Button 
+          variant="contained"
+          type='button'
+          onClick={() => saveData(data)}
+        >
+          Buy Now!
+        </Button>
+      </Box>
     </Wrapper>
   );
 };

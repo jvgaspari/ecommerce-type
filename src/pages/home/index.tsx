@@ -1,4 +1,4 @@
-import { Badge, Drawer, Grid } from "@mui/material";
+import { Badge, Box, Drawer, Grid } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import { UsuarioLogadoContext } from "../../shared/contexts";
@@ -6,7 +6,7 @@ import { ICartItem } from "../../shared/interfaces";
 import { ApiException } from "../../shared/services/api/ApiException";
 import { CartsService } from "../../shared/services/api/carts/CartsService";
 import { StyledButton, Wrapper } from "./styles";
-import { AddShoppingCart } from '@mui/icons-material';
+import { AddShoppingCart, Dashboard } from '@mui/icons-material';
 import Cart from "../../shared/components/Cart";
 import Item from "../../shared/components/Item";
 
@@ -28,14 +28,14 @@ export const Home = () => {
                     console.log(result);
                 }
             })
-    }, [products]);
+    }, []);
 
     const getTotalItems = (items: ICartItem[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
 
     const handleAddToCart = (clickedItem: ICartItem) => {
         setCartItems(prev => {
-          // 1. Is the item already added in the cart?
+
           const isItemInCart = prev.find(item => item.id === clickedItem.id);
     
           if (isItemInCart) {
@@ -45,7 +45,7 @@ export const Home = () => {
                 : item
             );
           }
-          // First time the item is added
+          
           return [...prev, { ...clickedItem, amount: 1 }];
         });
     };
@@ -67,9 +67,14 @@ export const Home = () => {
 
     return (
         <Wrapper>
-            <p>Bem-vindo à Home</p>
-            <p>{nomeDoUsuario}</p>
-            <Link to='/sobre'>Click me!</Link>
+            <Box display='flex' justifyContent='space-evenly' alignItems='center'>
+              <p>Welcome Home</p>
+              {/* <p>{nomeDoUsuario}</p> */}
+              <Box display='flex' justifyContent='space-evenly' alignItems='center'>
+                <Link to='/sobre'><Dashboard/></Link>
+                Go to Dashboard
+              </Box>
+            </Box>
             <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
