@@ -24,7 +24,6 @@ export const Home = () => {
                     alert(result.message);
                 } else {
                     setProducts(result);
-                    console.log(result);
                 }
             })
     }, []);
@@ -61,8 +60,6 @@ export const Home = () => {
           }, [] as ICartItem[])
         );
       };
-
-    console.log('products', products)
 
     return (
         <Wrapper>
