@@ -5,4 +5,5 @@ export type ICartItem = {
     image: string;
     price: number;
     title: string;
+    amount: number;
   };
