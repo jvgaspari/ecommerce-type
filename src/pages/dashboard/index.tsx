@@ -1,23 +1,20 @@
 import { ExitToApp } from "@mui/icons-material";
 import { Box, Button, Container } from "@mui/material";
-import { useContext, useState } from "react"
+// import { useState } from "react"
 import { Link } from "react-router-dom"
-import { UsuarioLogadoContext } from "../../shared/contexts";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 export const Dashboard = () => {
 
-    const { nomeDoUsuario } = useContext(UsuarioLogadoContext);
+    // const [data, setData] = useState({} as any)
 
-    const [data, setData] = useState({} as any)
-
-    const getData = (key:string) => {
-        var storedArray = localStorage.getItem(key);
-        // var stored = JSON.parse(`${storedArray}`);
-        setData(JSON.parse(`${storedArray}`))
-        // console.log('stored', stored)
-        // return stored;
-    }
+    // const getData = (key:string) => {
+    //     var storedArray = localStorage.getItem(key);
+    //     // var stored = JSON.parse(`${storedArray}`);
+    //     setData(JSON.parse(`${storedArray}`))
+    //     // console.log('stored', stored)
+    //     // return stored;
+    // }
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 70 },

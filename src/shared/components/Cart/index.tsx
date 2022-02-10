@@ -1,8 +1,9 @@
 import CartItem from '../CartItem';
 import { Wrapper } from './styles';
 import { ICartItem } from '../../interfaces';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
+import { UsuarioLogadoContext } from '../../contexts';
 
 type Props = {
   cartItems: ICartItem[];
@@ -12,9 +13,11 @@ type Props = {
 
 const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
 
-const [name,setName] = useState('' as string);
-const [cpf,setCpf] = useState('' as string);
-const [address,setAddress] = useState('' as string);
+  const { setModal } = useContext(UsuarioLogadoContext);
+
+  const [name,setName] = useState('' as string);
+  const [cpf,setCpf] = useState('' as string);
+  const [address,setAddress] = useState('' as string);
 
   const calculateTotal = (items: ICartItem[]) =>
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
@@ -26,13 +29,6 @@ const [address,setAddress] = useState('' as string);
     
   const saveData = (data:object) => {
     localStorage.setItem('usuário', JSON.stringify(data))
-  }
-
-  const getData = (key:string) => {
-    var storedArray = localStorage.getItem(key);
-    var stored = JSON.parse(`${storedArray}`)
-    console.log('stored', stored)
-    return stored;
   }
 
   return (
@@ -74,7 +70,11 @@ const [address,setAddress] = useState('' as string);
         <Button 
           variant="contained"
           type='button'
-          onClick={() => saveData(data)}
+          onClick={() => {
+            saveData(data)
+            setModal(false)
+          }
+          }
         >
           Buy Now!
         </Button>

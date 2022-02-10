@@ -12,11 +12,10 @@ import Item from "../../shared/components/Item";
 
 export const Home = () => {
 
-    const { nomeDoUsuario } = useContext(UsuarioLogadoContext);
+    const { modal, setModal } = useContext(UsuarioLogadoContext);
 
     const [products, setProducts] = useState<ICartItem[]>([])
     const [cartItems, setCartItems] = useState([] as ICartItem[]);
-    const [cartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
         CartsService.getAll()
@@ -75,14 +74,14 @@ export const Home = () => {
                 Go to Dashboard
               </Box>
             </Box>
-            <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+            <Drawer anchor='right' open={modal} onClose={() => setModal(false)}>
                 <Cart
                     cartItems={cartItems}
                     addToCart={handleAddToCart}
                     removeFromCart={handleRemoveFromCart}
                 />
             </Drawer>
-            <StyledButton onClick={() => setCartOpen(true)}>
+            <StyledButton onClick={() => setModal(true)}>
                 <Badge badgeContent={getTotalItems(cartItems)} color='error'>
                     <AddShoppingCart />
                 </Badge>
